@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
+import {TodoCounter } from './todoCounter';
+import {CreateTodoButton} from './createTodoButton';
+import { TodoList } from './todoList';
+import { TodoItem } from './todoItem';
+import {TodoSearch} from './todoSearch'
+
+const todos = [
+  { text: 'cortar cabello', completed: false},
+  { text: 'comer', completed: true},
+  { text: 'leer', completed: true},
+]
+
+function App(){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  // react interpreta las llaves vacias como un Fragment
+    <>      
+      <TodoCounter/>
+      <TodoSearch/>
+      <TodoList>
+         { todos.map( todo => (
+             <TodoItem completed={todo.completed} key={todo.text} text={todo.text}/>
+         ))}
+       </TodoList>
+      <CreateTodoButton/>
+    </>
   );
-}
+};
 
-export default App;
+export {App};
